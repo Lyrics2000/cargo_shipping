@@ -1,0 +1,91 @@
+# Login user
+
+POST http://127.0.0.1:8000/auth/jwt/create/
+Content-Type:  application/json
+
+{
+    "username":"djoserr",
+    "email":"thisisemail@gmail.com",
+    "password":"thisIsPassword12345"
+}
+
+### register user
+POST http://127.0.0.1:8000/auth/users/
+Content-Type:  application/json
+
+{
+    "username":"djoserr",
+    "email":"thisisemail@gmail.com",
+    "password":"thisIsPassword12345"
+}
+
+### verify token
+POST http://127.0.0.1:8000/auth/jwt/verify/
+Content-Type: application/json
+
+{
+    "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY2MDk2ODYxLCJqdGkiOiIzMmFhNmY1ZTUwNDU0ZmI1Yjk5OWFlNDA2Y2YyNjE3NCIsInVzZXJfaWQiOjN9.wCyZCk2gdMSFu3kOhy1z8ddbiCPudRek28mnSgqIBpU"
+}
+
+### user login
+
+POST http://127.0.0.1:8000/auth/token/login/
+Content-Type:  application/json
+
+{
+    "username":"djoserr",
+    "password":"thisIsPassword12345"
+}
+
+### check user
+GET http://127.0.0.1:8000/auth/users/me/
+
+Authorization: Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY2MDk3NDgzLCJqdGkiOiJlNjYwYzYyMTM0MzU0MGZmOTRhMDg3ZmUwNDY3NTA4NCIsInVzZXJfaWQiOjF9.BuoxuzlyJgGtw77RUTTz3zkQ8rj1w9CJmPv-czORkeQ
+
+
+### Add cargo to database
+
+POST  http://127.0.0.1:8000/home/add/cargo/
+Content-Type:  application/json
+Authorization: Token 3edc199c2a877293b21ed773f9da58fb6fc6e097
+
+{
+    "cargo_name":"Cargo name",
+    "vehicle_type":1,
+    "phone_number":"0704157038",
+    "pick_up":"Kangemi",
+    "destinanition":"Burundi",
+    "location_description":"This is full location description"
+
+
+
+}
+
+### Get all cargo
+GET http://127.0.0.1:8000/home/add/cargo/
+Authorization: Token 3edc199c2a877293b21ed773f9da58fb6fc6e097
+
+
+
+### Update Cargo
+POST http://127.0.0.1:8000/home/update/cargo/
+Authorization: Token 3edc199c2a877293b21ed773f9da58fb6fc6e097
+Content-Type:  application/json
+
+{
+    "cargo_id":3,
+    "status":true
+
+}
+
+
+### get all cargo history
+
+GET http://127.0.0.1:8000/home/update/cargo/
+Authorization: Token 3edc199c2a877293b21ed773f9da58fb6fc6e097
+
+
+### get all vehicle category
+GET http://127.0.0.1:8000/home/all/category/
+Authorization: Token 3edc199c2a877293b21ed773f9da58fb6fc6e097
+
