@@ -1,6 +1,6 @@
 # Login user
 
-POST http://127.0.0.1:8000/auth/jwt/create/
+POST https://still-cliffs-33927.herokuapp.com/auth/jwt/create/
 Content-Type:  application/json
 
 {
@@ -29,7 +29,7 @@ Content-Type: application/json
 
 ### user login
 
-POST http://127.0.0.1:8000/auth/token/login/
+POST https://still-cliffs-33927.herokuapp.com/auth/token/login/
 Content-Type:  application/json
 
 {
