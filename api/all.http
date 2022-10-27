@@ -45,7 +45,7 @@ Authorization: Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYW
 
 ### Add cargo to database
 
-POST  http://127.0.0.1:8000/home/add/cargo/
+POST  https://still-cliffs-33927.herokuapp.com/home/add/cargo/
 Content-Type:  application/json
 Authorization: Token 3edc199c2a877293b21ed773f9da58fb6fc6e097
 
@@ -62,13 +62,13 @@ Authorization: Token 3edc199c2a877293b21ed773f9da58fb6fc6e097
 }
 
 ### Get all cargo
-GET http://127.0.0.1:8000/home/add/cargo/
+GET https://still-cliffs-33927.herokuapp.com/home/add/cargo/
 Authorization: Token 3edc199c2a877293b21ed773f9da58fb6fc6e097
 
 
 
 ### Update Cargo
-POST http://127.0.0.1:8000/home/update/cargo/
+POST https://still-cliffs-33927.herokuapp.com/home/update/cargo/
 Authorization: Token 3edc199c2a877293b21ed773f9da58fb6fc6e097
 Content-Type:  application/json
 
@@ -81,11 +81,17 @@ Content-Type:  application/json
 
 ### get all cargo history
 
-GET http://127.0.0.1:8000/home/update/cargo/
+GET https://still-cliffs-33927.herokuapp.com/home/update/cargo/
 Authorization: Token 3edc199c2a877293b21ed773f9da58fb6fc6e097
 
 
 ### get all vehicle category
-GET http://127.0.0.1:8000/home/all/category/
+GET https://still-cliffs-33927.herokuapp.com/home/all/category/
 Authorization: Token 3edc199c2a877293b21ed773f9da58fb6fc6e097
+
+
+###sub price
+GET http://127.0.0.1:8000/home/all/price/
+Authorization: Token 3edc199c2a877293b21ed773f9da58fb6fc6e097
+
 

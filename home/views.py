@@ -4,6 +4,7 @@ from rest_framework.views import APIView
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication,TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 import random
+from django.db.models import Sum
 from rest_framework import viewsets
 from home.models import Cargo, vehicleCategory
 from .serializers import CargoSerializer, VehicleSerializers
@@ -115,6 +116,23 @@ class AllVehicleCategory(APIView):
         serializer_class = VehicleSerializers(queryset,many = True,read_only = True)
      
         return Response(serializer_class.data)
+
+
+class AllUserPrice(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+    def get(self,request,format = None):
+        queryset = Cargo.objects.filter(user =  request.user,arrived = False).aggregate(Sum('price'))
+
+        return Response(
+            {"status":"success",
+            "total":queryset
+            }
+        )
+    
+
+
+
 
 
 
