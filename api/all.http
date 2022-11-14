@@ -14,9 +14,9 @@ POST http://127.0.0.1:8000/auth/users/
 Content-Type:  application/json
 
 {
-    "username":"djoserr",
-    "email":"thisisemail@gmail.com",
-    "password":"thisIsPassword12345"
+    "username":"djyoserrjay",
+    "email":"thiusishedmail@gmail.com",
+    "password":"thisIsPadssword12345"
 }
 
 ### verify token
@@ -52,9 +52,9 @@ Authorization: Token 3edc199c2a877293b21ed773f9da58fb6fc6e097
 {
     "cargo_name":"Cargo name",
     "vehicle_type":1,
-    "phone_number":"0704157038",
+    "phone_number":"070415703aaa8",
     "pick_up":"Kangemi",
-    "destinanition":"Burundi",
+    "destinanition":"Burundi kigani",
     "location_description":"This is full location description"
 
 
@@ -62,7 +62,7 @@ Authorization: Token 3edc199c2a877293b21ed773f9da58fb6fc6e097
 }
 
 ### Get all cargo
-GET https://still-cliffs-33927.herokuapp.com/home/add/cargo/
+GET http://127.0.0.1:8000/home/add/cargo/
 Authorization: Token 3edc199c2a877293b21ed773f9da58fb6fc6e097
 
 
@@ -91,7 +91,16 @@ Authorization: Token 3edc199c2a877293b21ed773f9da58fb6fc6e097
 
 
 ###sub price
-GET http://127.0.0.1:8000/home/all/price/
+GET https://still-cliffs-33927.herokuapp.com/home/all/price/
 Authorization: Token 3edc199c2a877293b21ed773f9da58fb6fc6e097
 
 
+
+### POST
+POST  http://127.0.0.1:8000/home/track/cargo/
+Authorization: Token 3edc199c2a877293b21ed773f9da58fb6fc6e097
+Content-Type: application/json
+
+{
+    "id":3
+}

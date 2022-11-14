@@ -6,8 +6,8 @@ from rest_framework.permissions import IsAuthenticated
 import random
 from django.db.models import Sum
 from rest_framework import viewsets
-from home.models import Cargo, vehicleCategory
-from .serializers import CargoSerializer, VehicleSerializers
+from home.models import Cargo, vehicleCategory,TrackCargo
+from .serializers import CargoSerializer, VehicleSerializers,CargoTrackSerializer
 
 # Create your views here.
 
@@ -130,6 +130,24 @@ class AllUserPrice(APIView):
             }
         )
     
+
+class CargoTrack(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+    def post(self,request,format = None):
+        cargo_id = request.data['id']
+
+        cargo = Cargo.objects.get(id = int(cargo_id))
+        cargoost =TrackCargo.objects.filter(cargos = cargo)
+        ser = CargoTrackSerializer(cargoost,many= True)
+
+        return Response(
+            {"status":"success",
+            "total":ser.data
+            }
+        )
+    
+
 
 
 
