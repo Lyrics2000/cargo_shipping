@@ -6,7 +6,7 @@ from rest_framework.permissions import IsAuthenticated
 import random
 from django.db.models import Sum
 from rest_framework import viewsets
-from home.models import Cargo, vehicleCategory,TrackCargo
+from home.models import Cargo, vehicleCategory,TrackCargo,CurrentLocation
 from .serializers import CargoSerializer, VehicleSerializers,CargoTrackSerializer
 
 # Create your views here.
@@ -146,6 +146,45 @@ class CargoTrack(APIView):
             "total":ser.data
             }
         )
+
+
+class CurrentLocationApi(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def post(self,request,format = None):
+        lat = request.data['lat']
+        lon = request.data['lon']
+
+        obj =  CurrentLocation.objects.create(
+            user = request.user,
+            lat = lat,
+            lon = lon
+        )
+
+        if obj is not None:
+            return Response(
+                {
+                    "status":"success",
+                    "message":"created successuflly"
+                }
+            )
+        else:
+              return Response(
+                {
+                    "status":"failed",
+                    "message":"Error while creating"
+                }
+            )
+
+
+        
+
+        
+
+
+
+
     
 
 

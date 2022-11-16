@@ -10,6 +10,7 @@ class BaseModel(models.Model):
 class vehicleCategory(BaseModel):
     category_name = models.CharField(max_length = 255)
     location = models.CharField(max_length = 255,blank = True,null = True)
+    
 
     def __str__(self) -> str:
         return self.category_name
@@ -38,5 +39,16 @@ class TrackCargo(BaseModel):
 
     def __str__(self) -> str:
         return str(self.cargos)
+
+
+class CurrentLocation(BaseModel):
+    user =  models.ForeignKey(User,on_delete = models.CASCADE)
+    lat = models.DecimalField(max_digits=20,decimal_places=10)
+    lon = models.DecimalField(max_digits=20,decimal_places=10)
+
+
+    def __str__(self) -> str:
+        return str(self.user)
+
 
 
