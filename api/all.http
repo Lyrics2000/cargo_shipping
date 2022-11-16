@@ -109,6 +109,6 @@ Authorization: Token 3edc199c2a877293b21ed773f9da58fb6fc6e097
 Content-Type: application/json
 
 {
-    "lat":-122.084,
-    "lon":37.421998333333335
+    "lat":"-122.084",
+    "lon":"37.421998333333335"
 }

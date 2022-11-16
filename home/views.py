@@ -158,8 +158,8 @@ class CurrentLocationApi(APIView):
 
         obj =  CurrentLocation.objects.create(
             user = request.user,
-            lat = lat,
-            lon = lon
+            lat = float(lat),
+            lon = float(lon)
         )
 
         if obj is not None:
