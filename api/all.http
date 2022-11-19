@@ -82,7 +82,7 @@ Authorization: Token 3edc199c2a877293b21ed773f9da58fb6fc6e097
 
 
 ### get all vehicle category
-GET https://still-cliffs-33927.herokuapp.com/home/all/category/
+GET http://127.0.0.1:8000/home/all/category/
 Authorization: Token 3edc199c2a877293b21ed773f9da58fb6fc6e097
 
 

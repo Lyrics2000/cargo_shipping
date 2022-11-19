@@ -10,7 +10,10 @@ class BaseModel(models.Model):
 class vehicleCategory(BaseModel):
     category_name = models.CharField(max_length = 255)
     location = models.CharField(max_length = 255,blank = True,null = True)
-    
+    lat = models.DecimalField(max_digits=20,decimal_places=10,default=0.00)
+    lon = models.DecimalField(max_digits=20,decimal_places=10,default=0.00)
+
+
 
     def __str__(self) -> str:
         return self.category_name

@@ -8,9 +8,18 @@ from django.db.models import Sum
 from rest_framework import viewsets
 from home.models import Cargo, vehicleCategory,TrackCargo,CurrentLocation
 from .serializers import CargoSerializer, VehicleSerializers,CargoTrackSerializer
-
+from geopy import distance
+from django.contrib.auth.models import User
+from rest_framework.authtoken.models import Token
 # Create your views here.
 
+
+
+def get_distance(driver_lat, driver_long,client_lat,client_long):
+    coords_1 = (float(client_lat), float(client_long))
+    coords_2 = (float(driver_lat), float(driver_long))
+
+    return distance.distance(coords_1, coords_2).km
 
 class PostCargo(APIView):
     authentication_classes = [TokenAuthentication]
@@ -111,11 +120,40 @@ class GetHistory(APIView):
 
 
 class AllVehicleCategory(APIView):
-     def get(self,request,format = None):
-        queryset = vehicleCategory.objects.all()
-        serializer_class = VehicleSerializers(queryset,many = True,read_only = True)
-     
-        return Response(serializer_class.data)
+        authentication_classes = [TokenAuthentication]
+        permission_classes = [IsAuthenticated]
+        def get(self,request,format = None):
+            queryset = vehicleCategory.objects.all()
+            
+            print("user id",request.user)
+
+            usr = User.objects.get(id = request.user.id)
+            client_dist = CurrentLocation.objects.filter(user =  usr).first()
+            # print("client dist",client_dist.lon)
+            array = []
+            for k in queryset:
+                print("k",k.lat,k.lon,client_dist.lat,client_dist.lon)
+                ds = get_distance(k.lat,k.lon,client_dist.lat,client_dist.lon)
+                print("the dispance",ds)
+                array.append(float(ds))
+
+            sorted_list = sorted(array)
+
+            call_list = []
+
+            for i in sorted_list:
+                for j in queryset:
+            
+                    ds = get_distance(j.lat,j.lon,client_dist.lat,client_dist.lon)
+                    if float(ds) ==  float(i):
+                        call_list.append(j)
+
+
+            print("sorted",sorted_list)
+            
+            serializer_class = VehicleSerializers(call_list,many = True,read_only = True)
+        
+            return Response(serializer_class.data)
 
 
 class AllUserPrice(APIView):
