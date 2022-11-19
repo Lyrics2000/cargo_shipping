@@ -180,6 +180,9 @@ class CargoTrack(APIView):
         ser = CargoTrackSerializer(cargoost,many= True)
 
 
+
+
+
         return Response(
             {"status":"success",
             "total":ser.data
