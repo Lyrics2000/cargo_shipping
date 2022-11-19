@@ -49,7 +49,6 @@ class CurrentLocation(BaseModel):
     lat = models.DecimalField(max_digits=20,decimal_places=10)
     lon = models.DecimalField(max_digits=20,decimal_places=10)
 
-
     def __str__(self) -> str:
         return str(self.user)
 

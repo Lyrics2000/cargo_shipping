@@ -179,6 +179,7 @@ class CargoTrack(APIView):
         cargoost =TrackCargo.objects.filter(cargos = cargo)
         ser = CargoTrackSerializer(cargoost,many= True)
 
+
         return Response(
             {"status":"success",
             "total":ser.data
@@ -194,26 +195,77 @@ class CurrentLocationApi(APIView):
         lat = request.data['lat']
         lon = request.data['lon']
 
-        obj =  CurrentLocation.objects.create(
-            user = request.user,
-            lat = float(lat),
-            lon = float(lon)
-        )
+        if(float(lat) < float(-90)):
+            final_lat = float(lat) - -90
+            obj =  CurrentLocation.objects.create(
+                        user = request.user,
+                        lat = float(final_lat),
+                        lon = float(lon)
+                    )
 
-        if obj is not None:
-            return Response(
-                {
-                    "status":"success",
-                    "message":"created successuflly"
-                }
-            )
+            if obj is not None:
+                return Response(
+                        {
+                            "status":"success",
+                            "message":"created successuflly"
+                        }
+                    )
+            else:
+                    return Response(
+                        {
+                            "status":"failed",
+                            "message":"Error while creating"
+                        }
+                    )
+        elif (float(lon) < float(-90)):
+            final_lat = float(lon) - -90
+            obj =  CurrentLocation.objects.create(
+                        user = request.user,
+                        lat = float(lat),
+                        lon = float(final_lat)
+                    )
+
+            if obj is not None:
+                return Response(
+                        {
+                            "status":"success",
+                            "message":"created successuflly"
+                        }
+                    )
+            else:
+                    return Response(
+                        {
+                            "status":"failed",
+                            "message":"Error while creating"
+                        }
+                    )
+
         else:
-              return Response(
-                {
-                    "status":"failed",
-                    "message":"Error while creating"
-                }
-            )
+            final_lat = float(lon) + -90
+            obj =  CurrentLocation.objects.update_or_create(
+                        user = request.user,
+                        lat = float(lat),
+                        lon = float(lon)
+                    )
+
+            if obj is not None:
+                return Response(
+                        {
+                            "status":"success",
+                            "message":"created successuflly"
+                        }
+                    )
+            else:
+                    return Response(
+                        {
+                            "status":"failed",
+                            "message":"Error while creating"
+                        }
+                    )
+
+       
+
+        
 
 
         
